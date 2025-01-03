@@ -37,7 +37,19 @@ while run:
     #verific daca mingea iese in afara ferestrei
     if ball_y <= 0 + radius or ball_y >= HEIGHT - radius:
         ball_velocity_y *= -1
-     
+        #the ball bounces of the wall
+    
+    #verific contactul cu margina din partea dreapta
+    if ball_x >= WIDTH - radius:
+        ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius #initial position
+        ball_velocity_x *= -1
+        ball_velocity_y *= -1
+        
+    #verific contactul cu marginea din stanga     
+    if ball_x <= 0+radius:
+        ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
+        ball_velocity_x = 0.7
+        ball_velocity_y = 0.7 #imitial speed
 
     #Miscari
     ball_x += ball_velocity_x
