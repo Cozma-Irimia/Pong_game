@@ -24,7 +24,8 @@ paddle_width = 20
 paddle_height = 120
 left_paddle_y = right_paddle_y = HEIGHT/2 - paddle_height/2
 left_paddle_x = 100 - paddle_width/2
-right_paddle_x = WIDTH - (100 - paddle_width/2)
+right_paddle_x = WIDTH - (100 - paddle_width/2) 
+right_paddle_vellocity = left_paddle_vellocity = 0
 
 #main loop
 while run:
@@ -32,6 +33,19 @@ while run:
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             run = False
+        elif i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_UP:
+                right_paddle_vellocity = -0.9
+            if i.key == pygame.K_DOWN:
+                right_paddle_vellocity = 0.9
+            if i.key == pygame.K_w:
+                left_paddle_vellocity = -0.9
+            if i.key == pygame.K_s:
+                left_paddle_vellocity = 0.9
+
+        if i.type == pygame.KEYUP:
+            right_paddle_vellocity = 0
+            left_paddle_vellocity = 0  
 
     #Miscarile controlate ale mingii
     #verific daca mingea iese in afara ferestrei
@@ -54,7 +68,8 @@ while run:
     #Miscari
     ball_x += ball_velocity_x
     ball_y += ball_velocity_y
-
+    right_paddle_y += right_paddle_vellocity
+    left_paddle_y += left_paddle_vellocity
 
     pygame.draw.circle(wn, BLUE, (ball_x, ball_y), radius)
     pygame.draw.rect(wn, RED, pygame.Rect(left_paddle_x, left_paddle_y, paddle_width, paddle_height))
