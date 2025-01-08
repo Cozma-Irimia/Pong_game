@@ -81,6 +81,20 @@ while run:
     if right_paddle_y <= 0:
         right_paddle_y = 0
 
+    #coliziuni
+    #left_paddle
+    if left_paddle_x <= ball_x<= left_paddle_x + paddle_width:
+        if left_paddle_y <= ball_y <= left_paddle_y + paddle_height:
+            ball_x = left_paddle_x + paddle_height
+            ball_velocity_x = ball_velocity_x * (-1)
+
+    #right_paddle
+    if right_paddle_x <= ball_x <= right_paddle_x + paddle_width:
+        if right_paddle_y <= ball_y <= right_paddle_y + paddle_height:
+            ball_x = right_paddle_x - radius - 1 
+            ball_velocity_x = ball_velocity_x * (-1)
+
+
     pygame.draw.circle(wn, BLUE, (ball_x, ball_y), radius)
     pygame.draw.rect(wn, RED, pygame.Rect(left_paddle_x, left_paddle_y, paddle_width, paddle_height))
     pygame.draw.rect(wn, RED, pygame.Rect(right_paddle_x, right_paddle_y, paddle_width, paddle_height))
