@@ -71,6 +71,16 @@ while run:
     right_paddle_y += right_paddle_vellocity
     left_paddle_y += left_paddle_vellocity
 
+    #movements control
+    if left_paddle_y >= HEIGHT -paddle_height:
+        left_paddle_y =  HEIGHT -paddle_height 
+    if left_paddle_y <= 0 :
+        left_paddle_y = 0
+    if right_paddle_y >= HEIGHT -paddle_height:
+        right_paddle_y =  HEIGHT -paddle_height
+    if right_paddle_y <= 0:
+        right_paddle_y = 0
+
     pygame.draw.circle(wn, BLUE, (ball_x, ball_y), radius)
     pygame.draw.rect(wn, RED, pygame.Rect(left_paddle_x, left_paddle_y, paddle_width, paddle_height))
     pygame.draw.rect(wn, RED, pygame.Rect(right_paddle_x, right_paddle_y, paddle_width, paddle_height))
