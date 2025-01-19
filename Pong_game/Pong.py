@@ -32,6 +32,12 @@ left_paddle_x = 100 - paddle_width/2
 right_paddle_x = WIDTH - (100 - paddle_width/2) 
 right_paddle_vellocity = left_paddle_vellocity = 0
 
+#gadgets
+left_gadgets = 0
+right_gadgets = 0
+left_gadgets_remaining = 5
+right_gadgets_remaining = 5
+
 #main loop
 while run:
     wn.fill(BLACK)
@@ -43,10 +49,15 @@ while run:
                 right_paddle_vellocity = -0.9
             if i.key == pygame.K_DOWN:
                 right_paddle_vellocity = 0.9
+            if i.key == pygame.K_RIGHT and right_gadgets_remaining > 0:
+                right_gadgets = 1       
             if i.key == pygame.K_w:
                 left_paddle_vellocity = -0.9
             if i.key == pygame.K_s:
                 left_paddle_vellocity = 0.9
+            if i.key == pygame.K_d and left_gadgets_remaining>0:
+                left_gadgets = 1
+
 
         if i.type == pygame.KEYUP:
             right_paddle_vellocity = 0
@@ -67,7 +78,7 @@ while run:
             if ang == 0:
                 ball_velocity_x = -1.4
                 ball_velocity_y = 0.7
-            if ang == 1:
+            if ang == 1: 
                 ball_velocity_x = -0.7
                 ball_velocity_y = 0.7
             if ang == 2:
@@ -142,6 +153,24 @@ while run:
         if right_paddle_y <= ball_y <= right_paddle_y + paddle_height:
             ball_x = right_paddle_x - radius - 1 
             ball_velocity_x = ball_velocity_x * (-1)
+
+    #gadgets action
+    if left_gadgets ==1:
+        if left_paddle_x <= ball_x<= left_paddle_x + paddle_width:
+            if left_paddle_y <= ball_y <= left_paddle_y + paddle_height:
+                ball_x = left_paddle_x + paddle_height
+                ball_velocity_x = ball_velocity_x * (-3.5)
+                left_gadgets = 0
+                left_gadgets_remaining = left_gadgets_remaining - 1
+    
+    if right_gadgets == 1:
+        if right_paddle_x <= ball_x <= right_paddle_x + paddle_width:
+            if right_paddle_y <= ball_y <= right_paddle_y + paddle_height:
+                ball_x = right_paddle_x - radius - 1 
+                ball_velocity_x = ball_velocity_x * (-3.5)
+                ball_velocity_x *= (-3.5)
+                right_gadgets = 0
+                right_gadgets_remaining = right_gadgets_remaining - 1        
 
 
     pygame.draw.circle(wn, BLUE, (ball_x, ball_y), radius)
