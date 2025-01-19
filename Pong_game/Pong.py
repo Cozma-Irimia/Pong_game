@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -7,6 +8,10 @@ WIDTH, HEIGHT = 1000, 600
 wn = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("PONG GAME")
 run = True
+
+#variables for angles
+direction  =[0, 1]
+angle = [0, 1, 2]
 
 #colors RGB
 BLUE = (0, 0, 255)
@@ -56,12 +61,56 @@ while run:
     #verific contactul cu margina din partea dreapta
     if ball_x >= WIDTH - radius:
         ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius #initial position
+        dir = random.choice(direction)
+        ang = random.choice(angle)
+        if dir == 0:
+            if ang == 0:
+                ball_velocity_x = -1.4
+                ball_velocity_y = 0.7
+            if ang == 1:
+                ball_velocity_x = -0.7
+                ball_velocity_y = 0.7
+            if ang == 2:
+                ball_velocity_x = 0.7
+                ball_velocity_y = 1.4
+        if dir == 0:
+            if ang == 0:
+                ball_velocity_x = -1.4
+                ball_velocity_y = 0.7
+            if ang == 1:
+                ball_velocity_x = -0.7
+                ball_velocity_y = 0.7
+            if ang == 2:
+                ball_velocity_x = 0.7
+                ball_velocity_y = 1.4          
         ball_velocity_x *= -1
         ball_velocity_y *= -1
         
     #verific contactul cu marginea din stanga     
     if ball_x <= 0+radius:
         ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
+        dir = random.choice(direction)
+        ang = random.choice(angle)
+        if dir == 0:
+            if ang == 0:
+                ball_velocity_x = 1.4
+                ball_velocity_y = 0.7 
+            if ang == 1:
+                ball_velocity_x = 0.7
+                ball_velocity_y = 0.7
+            if ang == 2:
+                ball_velocity_x = 0.7
+                ball_velocity_y = 1.4
+        if dir == 0:
+            if ang == 0:
+                ball_velocity_x = -1.4
+                ball_velocity_y = 0.7
+            if ang == 1:
+                ball_velocity_x = -0.7
+                ball_velocity_y = 0.7
+            if ang == 2:
+                ball_velocity_x = 0.7
+                ball_velocity_y = 1.4  
         ball_velocity_x = 0.7
         ball_velocity_y = 0.7 #imitial speed
 
